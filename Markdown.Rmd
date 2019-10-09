@@ -1,7 +1,7 @@
 ---
 title: "Brownsey's R and Stats Cheatsheet"
 author: "Stephen Brownsey"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -102,35 +102,35 @@ A **Dependent** variable is the one being measured in the experiment and the **I
 
 ### TLDR: Statistical Tests
 
-######***One-Sample T-test***
+###### ***One-Sample T-test***
 This is used when you want to test whether the population mean of a variable is equal to a particular value, you do this by taking a sample from that population and then running the test on the sample. Where your null hypothesis will be that the population mean is = x and the null hypothesis that it is either not equal to x, < x or > x For example, you want to see if the average birth weight of flatcoated retriever puppies is equal to 1Kg, you can't possibly weigh every puppy born so you would need to take a sample from all flatcoated retriever puppies. For questions on this think how the assumptions may not be satisfied, you would need to pick the puppies independently (You couldn't just weigh the puppies from one litter as this would violate assumption 3, puppies are not necessarily representative of the whole population).
 
-######***Independent Samples T-test***
+###### ***Independent Samples T-test***
 This is used when you want to test the means for two groups, for example you may want to know if the birth weight of flatcoated retriever puppies is the same from two different breeders. Again you need to make sure all the assumptions are met, in this case you would need to make sure the puppies are independent again, for example not just taking the measurements from one litter from each breeder but sampling across all litters from each breeder.
 
-######***Paired Two-sample T-test***
+###### ***Paired Two-sample T-test***
 This is used when you want to test the means from one group at two separate time points, for example you want to test if attending Brownsey's puppy training course has will improve the obedience of your puppy. You have the obedience scores for all the puppies at two time points from a previous course: 1 ~ before attended the training and 2 ~ after you have attended the training. Here you will have your null hypothesis that there is no difference in the puppy's obedience scores after the training and your null hypothesis would be the scores after the training is greater than those before the puppy training. Remember to check all your assumptions - in this case you could have the assumption of no outliers is not satisfied (you have 2 flatcoats in your obedience class with really high obedience scores!)
 
-######***Wilcoxon Sign ranked test***
+###### ***Wilcoxon Sign ranked test***
 This is used instead a Paired Two-Sample T-test if it's assumptions are not satisfied, for example when the scores of puppy's are not normally distributed/contains outliers due to flatcoats being really smart dogs and having scores much higher than all other breeds! Example would be the same.
 
 
-######***F-test***
+###### ***F-test***
 This is used to test whether two population variances are equal. For example you want to test if the variance in Puppy Weight is equal between two breeds: Flatcoated Retrievers and Golden Retrievers!
 Your null hypothesis is the variances of the two breeds weights are equal and your alternative hypothesis that the variances are different (Two-tailed) or you can specify Flatcoated Retrievers have a larger variance than Golden Retrievers if you want it to be one-tailed.
 Again making sure the assumptions are met.
 
-######***Mann-Whitney U-test***
+###### ***Mann-Whitney U-test***
 Used to compares differences between two independent groups when the data is not normally distributed, used when you can't satisfy the assumptions of an Independent Samples T-test, Example would be the same.
 
-######***One-way Anova test***
+###### ***One-way Anova test***
 This is used to compare the means of two or more groups samples (using F-distribution), remember H0 is always the means come from the same population e.g. mean(a) = mean(b) = mean(c) and H1 is always that atleast one of the means is different.
 Example: You have 4 breeds of dogs and you want to test which dog scores highest in agility, you have the following breeds: Flatcoated Retriever, Cocker Spaniel, Springer Spaniel and Golden Retriever, this is your factor. You set out H0: Mean score in agility is the same for all breeds vs H1: Atleast one of the means is different. 
 
-######***Kruskal-Wallis test***
+###### ***Kruskal-Wallis test***
 You use this whenever the assumptions for a One-way Anova are not met: e.g Variances of the populations are not equal. Example would be the same.
 
-######***Two-way Anova test***
+###### ***Two-way Anova test***
 This is used to compare outcomes when there are two factors involved for example, dog intellengence is measured on a continuous scale from 1:100 and we think that there are two factors that affect this: Gender and breed. Similar to the One-way example above except in this case we have two factors and it would be split out into Flatcoat Retriever Male, Flatcoat Retriever female ,...,Golden Retriever female.
 From the table output from this, you can perform 3 sets of hypothesis tests:
 1. H0: The population means of the first factor are equal. H1: Atleast 1 is not equal
@@ -151,7 +151,7 @@ How to analyse data and choose which test is most appropriate.
 4. Step 4: Set out your null and alternative hypotheses and significance level *BEFORE* you do the test.
 5. Step 5: Run the code for the test and draw a conclusion for whether you are accepting null or alternative hypothesis.
 
-#####Examples
+##### Examples
 
 1. Example 1:
 * Is the data paired: No
@@ -187,10 +187,10 @@ summary(anova3)
 
 Now let's break down what each of the values mean using both of the above outputs:
 
-######***Source***
+###### ***Source***
 This column is basically your factors, A is factor 1, B is factor 2 and A*B is equal to the interaction of the two factors. You can think of the within as what's left.
 
-######***Degrees of Freedom***
+###### ***Degrees of Freedom***
 The total is equal to the total number of data observations you have - 1. In this case we have 60 observations and the Df column sums to 59.
 A: Now we can see that supp is a factor with two levels this means supp can take one of two values - for example if it was gender it could take values Male and Female - so it has two levels. DoF is denoted by number of levels - 1 which gives: 2 - 1 = 1.
 B: Same for B except this is a factor with three levels, for example dog breed: Flatcoat, Spaniel, Golden retriever and gives 3 - 1 = 2.
@@ -198,33 +198,33 @@ A x B: This is equal to A x B in this case 1 x 2 = 2.
 Within (Residuals): This is equal to the total (59) - (A + B + A x B) = 59 - 5 = 54
 So once you know a couple it is very easy to work out the missing DoF should you need to from applying the above formula and re-arranging to find the unknown DoF.
 
-######***Sum of Squares (SS)***
+###### ***Sum of Squares (SS)***
 This is basically the dispersion of the data in each of the groups and is calculated by summing each observation - the mean squared.
 Here it's worth noting the Total Sum of Squares is equal to the summation of all the others: SStotal = (SSa + SSb + SSaxb + SSwithin)
 
-######***Mean Squares (MS)***
+###### ***Mean Squares (MS)***
 This is given by the SS / DoF and works horizontally. I.E MS for dose = 2426.4 / 2 = 1213.2
 
-######***F-Value***
+###### ***F-Value***
 This is calculated by taking the row MS and dividing by the the Within MS: E.g the supp dose F-value is: 205.4/13.2 = 15.572
 To calculate whether this is signicant you can either use the Pr(>F) output from the R-code and compare this with your chosen significance level. Or if you are not using R you would take your F-value and compare it with the critical value found in the statistical tables.
 
-######***Critical-value***
+###### ***Critical-value***
 The critical value can be calculated using the F-distribution:[Tables](http://users.sussex.ac.uk/~grahamh/RM1web/F-ratio%20table%202005.pdf)
 You take the DoF of the Factor as the first one and the DoF of the Within (Residuals) as your second value and then read it off the table above.
 
-###Ways of Comparing Results
+### Ways of Comparing Results
 There are lots of ways of comparing results in general. In clinical trial papers you will tend to find: Risk Difference >  Odds Ratio > Risk Ratio in terms of how often they are used.
 Each method has it's pros and cons and has it's own confidence interval but in general, so long as you define which method you are going to use upfront and stick to it you will be fine. Do bear in mind depending on which method you use could lead to a different outcome for your comparison. Below is a brief explanation of each one:
 
-######***Risk Difference***
+###### ***Risk Difference***
 This is probably used most as it is in terms of absolute values, which in general are easier for people to quantify and visualise.
 It is denoted as the difference the incidence in the exposed group - the incidence in the control group. Where incidence is denoted by number of events in that group divided by total number of participants in that group. If they is no difference then you will expect an outcome value near to 0.
 
-######***Risk Ratio***
+###### ***Risk Ratio***
 This is similar to Risk Difference except that instead of taking the incidence in the exposed group and taking away the incidence in the control group you instead divide by the control group. In this case if there is no difference you will expect a value near to 1.
 
-######***Odds Ratio***
+###### ***Odds Ratio***
 The Odds Ratio is slightly more complex, it quantifies the strength of the association between two events. In other words: The ratio of the odds of A in the presence of B and the odds of A in the absence of B. Note: it doesn't matter which way around you look at this due to symmetry. If the Odds Ratio is > 1 it implies that A and B are *positively* correlated: The presence of B raises the odds of A and visa versa. IF the Odds Ratio is < 1 it implies that A and B are *negatively* correlated: The presence of B reduces the odds of A and visa versa.
 This is given by the ratio of diseased in exposed over control divided by ratio of healthy in exposed over control. The key difference here between this and the risk ratio is the denomitor here is healthy numbers instead of total numbers in each population. The further away from 1  the larger  the association between the two groups. A value of 1 would suggest that there is no association between the two.
 
@@ -235,7 +235,7 @@ Before you start using R, you need to do two things:
 
 2. Install R-Studio: [R-Studio download](https://www.rstudio.com/products/rstudio/download/)
 
-###Importing data and loading libraries
+### Importing data and loading libraries
 This subsection will take you through how to load libraries and also how to import datasets into R, but in reality you probably want to use the built in Import Dataset functionality in R-studio which can import the following files types: Excel, SPSS, SAS, Strata, Text - it will also produce the code required if you wanted to reimport it again in the future.
 You can access this by clicking on the import data set button in R-studios Environment tab, then you can select your file type from the drop-down list. All that's left to do is then browse for your file and press import.
 ```{r}
@@ -255,7 +255,7 @@ Some example code, commented out to just demostrate the shell code - one thing w
 #read_sas("path to .sas")
 #read_csv("/scratch/gantt/demo.csv")
 ```
-###Summarising and plotting basic data
+### Summarising and plotting basic data
 Say we have a dataset with lots of data in, then we may want to summarise it into a table or plot it to help us visualise it better. There are lots of ways to summarise data but the summarise function has the following useful functions: mean(), median(), sd(), IQR(), min(), max(),quantile(),first(),last(),nth(),n(). It also has some others but these are the ones I expect you may use, for a full list use ?summarise and select the 2nd option.
 ```{r}
 #A subset of the functions you can use inside the summarise call, just add as required.
